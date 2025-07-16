@@ -24,7 +24,7 @@ func LoadConfig() *Config {
 		Port:               os.Getenv("PORT"),
 		MaxFilesInTask:     getIntFromEnvFile("MAX_FILES"),
 		MaxConcurrentTasks: getIntFromEnvFile("MAX_CONCURRENT_TASKS"),
-		AllowedExtensions:  []string{".pdf", ".jpeg", ".jpg"},
+		AllowedExtensions:  []string{".pdf", ".jpg"},
 	}
 }
 

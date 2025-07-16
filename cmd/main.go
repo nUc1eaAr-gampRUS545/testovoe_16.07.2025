@@ -16,9 +16,12 @@ func main() {
 	taskService := task.NewTaskService(config)
 
 	//Handlers
-	task.NewTaskHandler(router, task.TaskHandlerDeps{
-		TaskService: taskService,
-	})
+	task.NewTaskHandler(
+		router,
+		task.TaskHandlerDeps{
+			TaskService: taskService,
+		},
+	)
 
 	stackMiddleware := middleware.Chain(
 		middleware.CORS,

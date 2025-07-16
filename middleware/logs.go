@@ -15,6 +15,6 @@ func Logging(next http.Handler) http.Handler {
 		}
 
 		next.ServeHTTP(wrapper, r)
-		log.Printf(string(wrapper.status), r.Method, r.URL.Path, time.Since(start).String())
+		log.Printf(string(rune(wrapper.status)), r.Method, r.URL.Path, time.Since(start).String())
 	})
 }

@@ -7,10 +7,16 @@ import (
 )
 
 type TaskHandlerDeps struct {
-	TaskService *TaskService
+	TaskService TaskServiceInterface
 }
 type TaskHandler struct {
-	TaskService *TaskService
+	TaskService TaskServiceInterface
+}
+
+type TaskHandlerInterface interface {
+	CreateTask() http.HandlerFunc
+	AddFilesToTask() http.HandlerFunc
+	GetTaskStatus() http.HandlerFunc
 }
 
 func NewTaskHandler(router *http.ServeMux, deps TaskHandlerDeps) {

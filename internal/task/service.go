@@ -13,7 +13,7 @@ import (
 	"testovoe_16.07.2025/pkg/utils"
 )
 
-type ITaskService interface {
+type TaskServiceInterface interface {
 	CreateTask() (*Task, error)
 	AddFilesToTask(taskID string, urls []string) (*Task, error)
 	GetTaskStatus(taskID string) (*Task, error)
@@ -37,7 +37,7 @@ func (service *TaskService) CreateTask() (*Task, error) {
 	defer service.taskMutex.Unlock()
 
 	if service.activeTasks >= service.config.MaxConcurrentTasks {
-		return nil, errors.New("server is busy, try again later")
+		return nil, errors.New(ServerIsBusyError)
 	}
 
 	taskID := utils.GenerateID()
@@ -203,6 +203,6 @@ func (service *TaskService) createArchive(task *Task) {
 	defer service.taskMutex.Unlock()
 
 	task.Status = "completed"
-	task.Archive = fmt.Sprintf("/download/%s", task.ID)
+	task.Archive = fmt.Sprintf("/archives/%s", task.ID)
 	service.activeTasks--
 }
